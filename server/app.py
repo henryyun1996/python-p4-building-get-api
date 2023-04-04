@@ -22,8 +22,11 @@ def index():
 @app.route('/games')
 def games():
 
+    # games_by_title = Game.query.order_by(Game.title).all()
+
     games = []
     for game in Game.query.all():
+    # for game in games_by_title:
         game_dict = {
             "title": game.title,
             "genre": game.genre,
@@ -33,7 +36,7 @@ def games():
         games.append(game_dict)
 
     response = make_response(
-        games,
+        jsonify(games),
         200
     )
 
